@@ -20,13 +20,13 @@ class ViewController: UIViewController {
     
     let tockSound = ViewController.loadTockSound()
     
-    let customView = UINib(nibName: "Custom", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as UIView
-    
     var model = Model()
     
     //
     // IBOutlets
     //
+    
+    @IBOutlet var keypad: UIView!
     
     @IBOutlet var billTextField: UITextField!
     @IBOutlet var tipTextField: UITextField!
@@ -34,6 +34,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var splitsTextField: UITextField!
     @IBOutlet var sliderTextField: UITextField!
+    
     @IBOutlet var slider: UISlider!
     @IBOutlet var stepper: UIStepper!
     
@@ -90,8 +91,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        println(UIScreen.mainScreen().bounds.size.height)
+        if UIScreen.mainScreen().bounds.size.height > 568.0 {
+            self.view.addConstraint(NSLayoutConstraint(item: self.keypad, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.keypad, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
+            )
+        }
         
-        // do any additional setup after loading the view
         redrawDisplay()
     }
     
@@ -153,6 +158,6 @@ class ViewController: UIViewController {
             }
         )
     }
-
+    
 }
 
